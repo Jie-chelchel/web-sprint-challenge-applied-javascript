@@ -1,19 +1,27 @@
 const Header = (title, date, temp) => {
-  //set up const and value
+  //set up const
   const header = document.createElement("div");
-  header.classList.add("header");
   const dateofDay = document.createElement("span");
+  const h1 = document.createElement("h1");
+  const temperature = document.createElement("span");
+
+  //add class and value
+
+  header.classList.add("header");
+
   dateofDay.classList.add("date");
   dateofDay.textContent = date;
-  const h1 = document.createElement("h1");
+
   h1.textContent = title;
-  const temperature = document.createElement("span");
+
   temperature.classList.add("temp");
   temperature.textContent = temp;
+
   //append
   header.appendChild(dateofDay);
   header.appendChild(h1);
   header.appendChild(temperature);
+  //return
   return header;
   // TASK 1
   // ---------------------
@@ -30,8 +38,10 @@ const Header = (title, date, temp) => {
 };
 
 const headerAppender = (selector) => {
+  //set up header container
   const headerContainer = document.querySelector(selector);
   headerContainer.classList.add(selector);
+  //call Header function to create header and append to the container
   headerContainer.appendChild(Header("Daily News", "06/28/2021", "75F"));
   // TASK 2
   // ---------------------

@@ -2,44 +2,51 @@ import axios from "axios";
 
 const Tabs = (topics) => {
   //set up const and values and classes
-  const tabs = document.createElement("div");
-  tabs.classList.add("topics");
+  const AllTabs = document.createElement("div");
+  AllTabs.classList.add("topics");
+
+  //loop through the array to create tabs and append each of them into the div allTabs
   topics.forEach((cur) => {
     let curTab = document.createElement("div");
     curTab.classList.add("tab");
     curTab.textContent = cur;
-    tabs.appendChild(curTab);
+    AllTabs.appendChild(curTab);
   });
-  return tabs;
-  // document.body.appendChild(Tabs(["javascript", "bootstrap", "technology"]));
-
-  // TASK 3
-  // ---------------------
-  // Implement this function which takes an array of strings ("topics") as its only argument.
-  // As an example, if the topics passed are ['javascript', 'bootstrap', 'technology']
-  // then the function returns the markup below.
-  // The tags used, the hierarchy of elements and their attributes must match the provided markup!
-  // The text inside elements will be set using their `textContent` property (NOT `innerText`).
-  //
-  // <div class="topics">
-  //   <div class="tab">javascript</div>
-  //   <div class="tab">bootstrap</div>
-  //   <div class="tab">technology</div>
-  // </div>
-  //
+  return AllTabs;
 };
+// document.body.appendChild(Tabs(["javascript", "bootstrap", "technology"]));
+
+// TASK 3
+// ---------------------
+// Implement this function which takes an array of strings ("topics") as its only argument.
+// As an example, if the topics passed are ['javascript', 'bootstrap', 'technology']
+// then the function returns the markup below.
+// The tags used, the hierarchy of elements and their attributes must match the provided markup!
+// The text inside elements will be set using their `textContent` property (NOT `innerText`).
+//
+// <div class="topics">
+//   <div class="tab">javascript</div>
+//   <div class="tab">bootstrap</div>
+//   <div class="tab">technology</div>
+// </div>
+//
 
 const tabsAppender = (selector) => {
+  //set up a container for all tabs
   const tabsContainer = document.querySelector(selector);
   tabsContainer.classList.add(selector);
+  //fetch data with axios
   axios
     .get("http://localhost:5000/api/topics")
     .then((res) => {
+      //save data to an array
       const arr = res.data.topics;
+      //pass array to Tabs and also append all the tabs into the container
       tabsContainer.appendChild(Tabs(arr));
-      // tabsContainer.appendChild(Tabs(arr));
     })
-    .catch((err) => console.log(err.message));
+    .catch((err) =>
+      console.log(`Oh no, something went wrong 👹: ${err.message}`)
+    );
 
   // TASK 4
   // ---------------------
