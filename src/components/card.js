@@ -51,19 +51,13 @@ const cardAppender = (selector) => {
     .get("http://localhost:5000/api/articles")
     .then((res) => {
       const allData = res.data.articles;
-      console.log(allData);
       const arrOfTabs = Object.keys(allData);
       arrOfTabs.forEach((curTab) => {
-        console.log(curTab);
-        console.log(allData[`${curTab}`]);
-        for (let i = 0; i < allData[`${curTab}`].length; i++) {
-          console.log(allData[`${curTab}`][i]);
-          Card(allData[`${curTab}`][i]);
-          cardsContainer.appendChild(Card(allData[`${curTab}`][i]));
-        }
+        const eachTabObj = allData[`${curTab}`];
+        eachTabObj.forEach((obj) => {
+          cardsContainer.appendChild(Card(obj));
+        });
       });
-
-      // allData.forEach(cur);
     })
     .catch((err) => console.log(`Oh no, something went wrong`));
   // TASK 6
